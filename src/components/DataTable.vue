@@ -1,9 +1,5 @@
 <template>
   <div class="ui-data-table">
-    {{moneyFilter}}
-    <div class="ui-data-table__filter">
-      <ui-money v-model="moneyFilter" />
-    </div>
 
     <div class="ui-data-table__filter">
       <ui-money v-model="moneyFilter" />
@@ -71,15 +67,18 @@ export default {
 
   computed: {
     pageCount() {
-      return Math.ceil(this.rows.length / this.pageSize);
+      return Math.ceil(this.filteredRows.length / this.pageSize);
+    },
+
+    filteredRows() {
+      return this.rows.filter((row) => this.moneyFilter <= 0 || row.money <= this.moneyFilter);
     },
 
     selectedRows() {
-      const filtered = this.rows.filter(() => true);
       const selectedRows = [];
       for (let i = (this.page - 1) * this.pageSize, ln = i + this.pageSize; i < ln; i += 1) {
-        if (!filtered[i]) break;
-        selectedRows.push(filtered[i]);
+        if (!this.filteredRows[i]) break;
+        selectedRows.push(this.filteredRows[i]);
       }
       return selectedRows;
     },

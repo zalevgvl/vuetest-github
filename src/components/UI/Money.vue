@@ -14,14 +14,14 @@ export default {
   props: {
     value: {
       type: Number,
-      require: true,
+      required: true,
     },
   },
 
   computed: {
     valueInput: {
       get() {
-        return this.props?.value || null;
+        return this.value;
       },
       set(value) {
         this.$emit('input', Number(value));
