@@ -14,8 +14,8 @@
       </ui-alert>
 
       <data-table :rows="data" :columns="columns" />
-    </template>
-  </main>
+  </template>
+</main> 
 </template>
 
 <script>
