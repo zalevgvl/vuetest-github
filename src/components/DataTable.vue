@@ -6,7 +6,7 @@
     </div>
 
     <div class="ui-data-table__body">
-      <div class="ui-data-table__row ui-data-table__header-row" v-if="!isMobileView">
+      <div class="ui-data-table__row ui-data-table__header-row">
         <div class="ui-data-table__header"
              v-for="(header, hIndex) in columns"
              :key="hIndex"
@@ -19,7 +19,8 @@
              v-for="(col, colIndex) in row"
              :key="colIndex"
              :style="{width: col.width}">
-          {{col.value}}
+          <span class="ui-data-table__col-header">{{col.label}}</span>
+          <span class="ui-data-table__col-value">{{col.value}}</span>
         </div>
       </div>
     </div>
@@ -52,7 +53,6 @@ export default {
     page: 1,
     pageSize: 4,
     moneyFilter: 0,
-    isMobileView: false,
   }),
 
   methods: {
@@ -71,7 +71,7 @@ export default {
     },
 
     filteredRows() {
-      return this.rows.filter((row) => this.moneyFilter <= 0 || row.money <= this.moneyFilter);
+      return this.rows.filter((row) => !this.moneyFilter || this.moneyFilter < 0 || row.money <= this.moneyFilter);
     },
 
     selectedRows() {

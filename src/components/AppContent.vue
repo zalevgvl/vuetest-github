@@ -9,7 +9,7 @@
           <p>You can clear cache and load data again.</p>
         </template>
         <template #footer>
-          <ui-button type="primary"> Clear cache </ui-button>
+          <ui-button type="primary" @click="load()"> Clear cache </ui-button>
         </template>
       </ui-alert>
 
